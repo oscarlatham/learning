@@ -47,7 +47,7 @@ word_list = [
     "job", "join", "just", "keep", "key", "kid", "kill", "kind", "kitchen", "know",
     "knowledge", "land", "language", "large", "last", "late", "later", "laugh", "law", "lawyer",
     "lay", "lead", "leader", "learn", "least", "leave", "left", "leg", "legal", "less",
-    "let", "letter", "level" ]
+    "let", "letter", "level", "lawyer" ]
 
 random_number = random.randint(0, len(word_list) - 1)
 
