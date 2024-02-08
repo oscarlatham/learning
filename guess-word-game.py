@@ -111,7 +111,9 @@ random_number = random.randint(0, len(word_list) - 1)
 
 secret_word = word_list[random_number]
 
-incorrect_guesses = 0
+total_incorrect_guesses = 0
+
+incorrect_guesses = []
 
 maximum_gusses = 10
 
@@ -120,30 +122,42 @@ display_word = ["_"] * len(secret_word)
 
 while True:
 
-    if incorrect_guesses >= 1 and incorrect_guesses <= 2:
+    if total_incorrect_guesses >= 1 and total_incorrect_guesses <= 2:
         hangman1()
-    elif incorrect_guesses >= 3 and incorrect_guesses <= 4:
+    elif total_incorrect_guesses >= 3 and total_incorrect_guesses <= 4:
         hangman2()
-    elif incorrect_guesses >= 5 and incorrect_guesses <= 6:
+    elif total_incorrect_guesses >= 5 and total_incorrect_guesses <= 6:
         hangman3()
-    elif incorrect_guesses >= 7 and incorrect_guesses <= 9:
+    elif total_incorrect_guesses >= 7 and total_incorrect_guesses <= 9:
         hangman4()
         
     print("")
     print(" ".join(display_word))
     print("")
+    str_incorrect_guesses = " ".join(incorrect_guesses)
+    print(f"Incorrect guesses ({total_incorrect_guesses} of {maximum_gusses}): {str_incorrect_guesses}")
+    print("")
 
     user_letter = input("What do you think the next letter in the word is: ")
 
-    if user_letter in secret_word:
+    # The user guessed this letter more than once
+    if user_letter in display_word:
+        print(f"You have already guessed the letter {user_letter}")
+    # The user has already guessed this letter incorrectly
+    elif user_letter in incorrect_guesses:
+        print(f"You have already gussed {user_letter} incorrectly")
+    # The user guessed correctly
+    elif user_letter in secret_word:
         print(f"The letter '{user_letter}' is in the word.")
 
         for counter in range(len(secret_word)):
             if user_letter is secret_word[counter]:
                 display_word[counter] = user_letter
+    # The user guessed incorrectly
     else:            
-        incorrect_guesses = incorrect_guesses + 1
-        print(f"The letter '{user_letter}' is not in the word. Incorrect guesses ({incorrect_guesses} of {maximum_gusses})")
+        total_incorrect_guesses = total_incorrect_guesses + 1
+        incorrect_guesses.append(user_letter)
+        print(f"The letter '{user_letter}' is not in the word.")
 
     if secret_word == "".join(display_word):
         print("")
@@ -152,7 +166,7 @@ while True:
         print("Congrarulations you got the correct word")
         break
 
-    if maximum_gusses == incorrect_guesses:
+    if maximum_gusses == total_incorrect_guesses:
         hangman5()
         print(f"you faild the word was {secret_word}")
         break
