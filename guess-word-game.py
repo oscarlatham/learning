@@ -49,18 +49,86 @@ word_list = [
     "lay", "lead", "leader", "learn", "least", "leave", "left", "leg", "legal", "less",
     "let", "letter", "level", "lawyer" ]
 
+def hangman1():
+    print()
+    print()
+    print("|---------------")
+
+def hangman2():
+    print()
+    print()
+    print("|")
+    print("|")
+    print("|")
+    print("|")
+    print("|")
+    print("|")
+    print("|")
+    print("|\\")
+    print("|---------------")
+
+def hangman3():
+    print()
+    print()
+    print("|-----------")
+    print("|")
+    print("|")
+    print("|")
+    print("|")
+    print("|")
+    print("|")
+    print("|\\")
+    print("|---------------")
+
+def hangman4():
+    print()
+    print()
+    print("|-----------|")
+    print("|           |")
+    print("|")
+    print("|")
+    print("|")
+    print("|")
+    print("|")
+    print("|\\")
+    print("|---------------")
+
+def hangman5():
+    print()
+    print()
+    print("|-----------|")
+    print("|           |")
+    print("|           O")
+    print("|          /|\\")
+    print("|           |")
+    print("|          / \\")
+    print("|")
+    print("|\\")
+    print("|---------------")
+    
+
 random_number = random.randint(0, len(word_list) - 1)
 
 secret_word = word_list[random_number]
 
 incorrect_guesses = 0
 
-maximum_gusses = 5
+maximum_gusses = 10
 
 # Print one underscore for each letter in the word
 display_word = ["_"] * len(secret_word)
 
 while True:
+
+    if incorrect_guesses >= 1 and incorrect_guesses <= 2:
+        hangman1()
+    elif incorrect_guesses >= 3 and incorrect_guesses <= 4:
+        hangman2()
+    elif incorrect_guesses >= 5 and incorrect_guesses <= 6:
+        hangman3()
+    elif incorrect_guesses >= 7 and incorrect_guesses <= 9:
+        hangman4()
+        
     print("")
     print(" ".join(display_word))
     print("")
@@ -85,7 +153,9 @@ while True:
         break
 
     if maximum_gusses == incorrect_guesses:
-        print("you faild")
+        hangman5()
+        print(f"you faild the word was {secret_word}")
         break
+
 
 
